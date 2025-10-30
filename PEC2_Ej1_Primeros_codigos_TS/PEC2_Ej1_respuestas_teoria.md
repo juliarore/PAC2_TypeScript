@@ -30,4 +30,6 @@ A diferència de JavaScript, TypeScript ens avisa d'aquest tipus d'errors abans 
 ---
 
 3. Quina és la diferència entre una classe i una interfície a TypeScript?
+- Una **classe** serveix per crear objectes amb les seves propietats i mètodes, és a dir, defineix l'estructura i el comportament dels objectes. A més, les classes es poden instanciar per crear múltiples objectes amb les mateixes característiques (`new`). També poden incloure constructors, propietats, *getters* i *setters*, així com mecanismes d’herència (`extends`), modificadors d’accés (`public`, `private`, `protected`) i la possibilitat d’implementar interfícies (`implements`).
+- En canvi, una **interfície** només descriu com ha de ser l'estructura d'un objecte, especificant les propietats i els tipus que ha de tenir, però no implementa cap funcionalitat.
 
