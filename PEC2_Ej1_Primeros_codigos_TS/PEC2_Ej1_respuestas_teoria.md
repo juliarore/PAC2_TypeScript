@@ -22,7 +22,12 @@ A diferència de JavaScript, TypeScript ens avisa d'aquest tipus d'errors abans 
 ---
 
 2. Per què es dispara cadascun dels errors del fitxer `code3.ts`?
+- `Cannot assign to 'i' because it is a constant`: El primer error és degut al fet que s'està intentant assignar un nou valor a una constant, cosa que no és possible ni en TypeScript ni en JavaScript, ja que les variables constants no poden ser reassignades.
+- `Argument of type 'string' is not assignable to parameter of type 'number'`: El segon error es produeix perquè s'està intentant afegir un valor de tipus *string* a l'array d'una variable que ha estat declarada com a `number[]`. Com que l'*array* només pot contenir nombres, afegir una cadena de text provoca un *TypeError*.
+- `Type '4' is not assignable to type 'never'`: El tercer error apareix perquè s’intenta assignar el valor `4` a una variable declarada amb el tipus `never`. El tipus `never` representa valors que no poden existir mai, com ara funcions que no retornen res o situacions que no es poden donar. És per això que TypeScript no permet assignar cap valor a una variable d’aquest tipus.
+- `'l' is of type 'unknown'`: El quart error es produeix perquè s'està intentant fer ús d'una variable declarada com a `unknown`. Aquest tipus indica que es desconeix quin el valor conté la variable, i TypeScript obliga a comprovar-ne el tipus abans d’utilitzar-la. Com que en aquest cas no s’ha verificat si `l` és un *number*, la multiplicació no es pot dur a terme fins que no es comprovi el tipus amb una condició (`typeof l === 'number'`).
 
 ---
 
 3. Quina és la diferència entre una classe i una interfície a TypeScript?
+
