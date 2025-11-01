@@ -1,12 +1,27 @@
 {
+  /* Configuració del compilador de TypeScript */
   "compilerOptions": {
     /* Basic Options */
+
+    /* L'opció 'target' indica a quina versió de JavaScript es traduirà el codi TypeScript. En aquest cas, es transpilarà a EcmaScript 2015, que és la versió més recent. */
     "target": "es2015", 
+
+    /* L'opció 'module' defineix el sistema de mòduls de JavaScript. Els mòduls serveixen per organitzar el codi en diferents fitxers, facilitant així la seva reutilització. En aquest cas, es farà servir CommonJS, que és el sistema utilitzat per Node.js. */
     "module": "commonjs", 
+
+    /* L'opció 'outDir' especifica on es guardaran els fitxers JavaScript generats després de la compilació (carpeta de sortida). En aquest cas, tots els .js es col·locaran dins la carpeta /dist. */
     "outDir": "./dist",   
+
+    /* L'opció 'rootDir' indica on es troba el codi TypeScript original (carpeta arrel dels fitxers d'entrada). */
     "rootDir": "./src", 
+
+    /* L'opció 'strict' activa totes les comprovacions de tipus estrictes. Aquesta configuració és important perquè permet detectar errors abans d'executar el codi. */
     "strict": true,
+
+    /* L'opció 'incremental' fa que TypeScript recordi quins fitxers ja s’han compilat i només torni a compilar els que han canviat. Això és molt útil en projectes grans perquè agilitza el temps de compilació. */
     "incremental": true,
+
+    /* L'opció 'tsBuildInfoFile' indica on es guardarà la informació sobre la compilació incremental. Aquest fitxer és intern i serveix per saber quins arxius han canviat des de l'última compilació. Aquí s'ha configurat perquè es guardi en un fitxer anomenat 'buildcache'. */
     "tsBuildInfoFile": "./buildcache",
   }
 }
