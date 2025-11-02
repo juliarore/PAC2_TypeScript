@@ -2,7 +2,7 @@
 
 Per provocar expressament un `TypeError` al fitxer `code1.ts`, s'ha modificat el valor de la propietat `apple` de l'objecte `c` perquè sigui un *string* en lloc d'un *number*. Això fa que l'operació de multiplicació definida a la variable `d` doni error, ja que no es pot multiplicar una cadena de text per un nombre.
 
-![TypeError provocat](image.png)
+![TypeError provocat](./image.png)
 
 A diferència de JavaScript, TypeScript ens avisa d'aquest tipus d'errors abans d'executar el codi, cosa que ens permet **detectar i corregir problemes durant el desenvolupament**, evitant errors futurs i millorant la fiabilitat del codi.
 
