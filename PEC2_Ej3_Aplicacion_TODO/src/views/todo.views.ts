@@ -1,11 +1,22 @@
 import { Todo } from "../models/todo.model.js";
 
 /**
+ * Interface que defineix els mètodes essencials d'una vista.
+ */
+export interface StructureView {
+  displayTodos(todos: Todo[]): void;
+  bindAddTodo(handler: (todo: string) => void): void;
+  bindDeleteTodo(handler: (id: string) => void): void;
+  bindEditTodo(handler: (id: string, text: string) => void): void;
+  bindToggleTodo(handler: (id: string) => void): void;
+}
+
+/**
  * @class View
  *
  * Visual representation of the model.
  */
-export class TodoView {
+export class TodoView implements StructureView {
   
   private app: HTMLElement;
   private form: HTMLFormElement;
