@@ -1,3 +1,8 @@
+import { Todo } from "../models/todo.model.js";
+import { TodoService } from "../services/todo.service.js";
+import { TodoView } from "../views/todo.views.js";
+
+
 /**
  * @class Controller
  *
@@ -6,8 +11,11 @@
  * @param model
  * @param view
  */
-class TodoController {
-  constructor(service, view) {
+export class TodoController {
+  private service: TodoService;
+  private view: TodoView;
+
+  constructor(service: TodoService, view: TodoView) {
     this.service = service;
     this.view = view;
 
@@ -22,23 +30,23 @@ class TodoController {
     this.onTodoListChanged(this.service.todos);
   }
 
-  onTodoListChanged = todos => {
+  onTodoListChanged = (todos: Todo[]) => {
     this.view.displayTodos(todos);
   };
 
-  handleAddTodo = todoText => {
+  handleAddTodo = (todoText: string) => {
     this.service.addTodo(todoText);
   };
 
-  handleEditTodo = (id, todoText) => {
+  handleEditTodo = (id: string, todoText: string) => {
     this.service.editTodo(id, todoText);
   };
 
-  handleDeleteTodo = id => {
+  handleDeleteTodo = (id: string) => {
     this.service.deleteTodo(id);
   };
 
-  handleToggleTodo = id => {
+  handleToggleTodo = (id: string) => {
     this.service.toggleTodo(id);
   };
 }
