@@ -1,51 +1,58 @@
+import { Todo } from "../models/todo.model.js";
+
 /**
  * @class View
  *
  * Visual representation of the model.
  */
-class TodoView {
+export class TodoView {
+  
+  private app: HTMLElement;
+  private form: HTMLFormElement;
+  private input: HTMLInputElement;
+  private submitButton: HTMLButtonElement;
+  private title: HTMLElement;
+  private todoList: HTMLElement;
+  private _temporaryTodoText: string;
+
   constructor() {
-    this.app = this.getElement("#root");
-    this.form = this.createElement("form");
-    this.input = this.createElement("input");
+    this.app = this.getElement("#root") as HTMLElement;
+    this.form = this.createElement("form") as HTMLFormElement;
+    this.input = this.createElement("input") as HTMLInputElement;
     this.input.type = "text";
     this.input.placeholder = "Add todo";
     this.input.name = "todo";
-    this.submitButton = this.createElement("button");
+    this.submitButton = this.createElement("button") as HTMLButtonElement;
     this.submitButton.textContent = "Submit";
     this.form.append(this.input, this.submitButton);
-    this.title = this.createElement("h1");
+    this.title = this.createElement("h1") as HTMLElement;
     this.title.textContent = "Todos";
-    this.todoList = this.createElement("ul", "todo-list");
+    this.todoList = this.createElement("ul", "todo-list") as HTMLElement;
     this.app.append(this.title, this.form, this.todoList);
 
     this._temporaryTodoText = "";
     this._initLocalListeners();
   }
 
-  get _todoText() {
+  private get _todoText(): string {
     return this.input.value;
   }
 
-  _resetInput() {
+  private _resetInput(): void {
     this.input.value = "";
   }
 
-  createElement(tag, className) {
+  private createElement(tag: string, className?: string): HTMLElement {
     const element = document.createElement(tag);
-
     if (className) element.classList.add(className);
-
     return element;
   }
 
-  getElement(selector) {
-    const element = document.querySelector(selector);
-
-    return element;
+  private getElement(selector: string): HTMLElement | null {
+    return document.querySelector(selector);
   }
 
-  displayTodos(todos) {
+  displayTodos(todos: Todo[]): void {
     // Delete all nodes
     while (this.todoList.firstChild) {
       this.todoList.removeChild(this.todoList.firstChild);
@@ -62,12 +69,12 @@ class TodoView {
         const li = this.createElement("li");
         li.id = todo.id;
 
-        const checkbox = this.createElement("input");
+        const checkbox = this.createElement("input") as HTMLInputElement;
         checkbox.type = "checkbox";
         checkbox.checked = todo.complete;
 
         const span = this.createElement("span");
-        span.contentEditable = true;
+        span.contentEditable = "true";
         span.classList.add("editable");
 
         if (todo.complete) {
@@ -91,15 +98,16 @@ class TodoView {
     console.log(todos);
   }
 
-  _initLocalListeners() {
+  private _initLocalListeners(): void {
     this.todoList.addEventListener("input", event => {
-      if (event.target.className === "editable") {
-        this._temporaryTodoText = event.target.innerText;
+      const target = event.target as HTMLElement;
+      if (target.className === "editable") {
+        this._temporaryTodoText = target.innerText;
       }
     });
   }
 
-  bindAddTodo(handler) {
+  bindAddTodo(handler: (todo: string) => void): void {
     this.form.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -110,32 +118,33 @@ class TodoView {
     });
   }
 
-  bindDeleteTodo(handler) {
+  public bindDeleteTodo(handler: (id: string) => void): void {
     this.todoList.addEventListener("click", event => {
-      if (event.target.className === "delete") {
-        const id = event.target.parentElement.id;
-
+      const target = event.target as HTMLElement;
+      
+      if (target.className === "delete") {
+        const id = (target.parentElement as HTMLElement).id;
         handler(id);
       }
     });
   }
 
-  bindEditTodo(handler) {
+  public bindEditTodo(handler: (id: string, text: string) => void): void {
     this.todoList.addEventListener("focusout", event => {
+      const target = event.target as HTMLElement;
       if (this._temporaryTodoText) {
-        const id = event.target.parentElement.id;
-
+        const id = (target.parentElement as HTMLElement).id;
         handler(id, this._temporaryTodoText);
         this._temporaryTodoText = "";
       }
     });
   }
-
-  bindToggleTodo(handler) {
+  
+  public bindToggleTodo(handler: (id: string) => void): void {
     this.todoList.addEventListener("change", event => {
-      if (event.target.type === "checkbox") {
-        const id = event.target.parentElement.id;
-
+      const target = event.target as HTMLInputElement;
+      if (target.type === "checkbox") {
+        const id = (target.parentElement as HTMLElement).id;
         handler(id);
       }
     });
