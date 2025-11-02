@@ -2,6 +2,14 @@ import { Todo } from "../models/todo.model.js";
 import { TodoService } from "../services/todo.service.js";
 import { TodoView } from "../views/todo.views.js";
 
+// Interface que descriu les propietats del controller
+export interface StructureController {
+  onTodoListChanged(todos: Todo[]): void;
+  handleAddTodo(todoText: string): void;
+  handleEditTodo(id: string, todoText: string): void;
+  handleDeleteTodo(id: string): void;
+  handleToggleTodo(id: string): void;
+}
 
 /**
  * @class Controller
@@ -11,7 +19,7 @@ import { TodoView } from "../views/todo.views.js";
  * @param model
  * @param view
  */
-export class TodoController {
+export class TodoController implements StructureController {
   private service: TodoService;
   private view: TodoView;
 
