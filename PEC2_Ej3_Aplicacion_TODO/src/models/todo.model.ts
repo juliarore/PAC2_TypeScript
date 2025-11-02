@@ -1,10 +1,17 @@
+// Interface que descriu les propietats d'un TODO
+export interface StructureTodo {
+  id: string;
+  text: string;
+  complete: boolean;
+}
+
 /**
  * @class Model
  *
  * Manages the data of the application.
  */
 
-export class Todo {
+export class Todo implements StructureTodo {
 
   // Definim les propietats del model i el seu tipat
   id: string;
