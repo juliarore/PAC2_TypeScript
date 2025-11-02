@@ -1,11 +1,21 @@
 import { Todo } from "../models/todo.model.js";
 
+// Interface que descriu les propietats d'un TODO service
+export interface StructureTodoService {
+  todos: Todo[];
+  addTodo(text: string): void;
+  editTodo(id: string, updatedText: string): void;
+  deleteTodo(id: string): void;
+  toggleTodo(id: string): void;
+  bindTodoListChanged(callback: (todos: Todo[]) => void): void;
+}
+
 /**
  * @class Service
  *
  * Manages the data of the application.
  */
-export class TodoService {
+export class TodoService implements StructureTodoService {
   public todos: Todo[];
   private onTodoListChanged: (todos: Todo[]) => void;
 
